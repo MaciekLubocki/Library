@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Edition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+    <h2> Update details: </h2>
+    <form method="POST" action="/items/{{ item_id }}/">
+        {{ form.hidden_tag() }}
+        <div class="content_a">
+         <table>
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                <tr>
+                    <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                    <td>{{ field }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        </div>
+        <h4>Delete above item: </h4>
+        <input type="checkbox" name="delete">
+        <br><br>
+        <input type="submit" value="Enter">
+    </form>
+</div>
+</body>
+</html>

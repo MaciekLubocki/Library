@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Collection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+       
+            <div class="header_label"><h2>HOME LIBRARY 2.0</h2></div>
+            <br>    
+            <br>    
+            <br>    
+            <div class="content">
+            <table>
+                <thead>
+                    <th>Media type</th>
+                    <th>Author</th>
+                    <th>Title</th>
+                    <th>Opinion</th>
+                    <th>Status</th>
+                </thead>
+    
+{% for item in items %}
+<tr>
+    <td>{{ item.media }}</td>
+    <td><a href="/author/{{item.author}}">{{ item.author }}</a></td>
+    <td><a href="/items/{{ loop.index }}">{{ item.title }}</a></td>
+        <td>{{ item.opinion }}</td>
+        <td>{{ item.rented }}</td>
+    </tr>
+{% endfor %}
+</table>
+<div>
+   
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2> Add item to library: </h2>
+    <form method="POST" action="/items/">
+        {{ form.hidden_tag() }}
+        <table>
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                <tr>
+                    <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                    <td>{{ field }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Enter">
+    </form>
+</div>
+</body>
+</html> 
